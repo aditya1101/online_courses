@@ -1,0 +1,103 @@
+---
+title: "Section 1: What we measure, why and how"
+author: "Aditya Rao"
+date: "2022-12-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+my_working_dir = "/Users/adityarao/personal_projects/online_courses/HarvardX Data Analysis for Genomics Professional Certificate/HarvardX PH525.5x Introduction to Bioconductor Annotation and Analysis of Genomes and Genomic Assays"
+setwd(my_working_dir)
+library(data.table)
+library(ggplot2)
+```
+
+```{r}
+library(genefu)
+data(sig.gene70)
+dim(sig.gene70)
+head(sig.gene70)[,1:6]
+```
+
+
+```{r}
+sum(is.na(sig.gene70$NCBI.gene.symbol))
+sig.gene70$NCBI.gene.symbol[sig.gene70$Description == "cyclin E2"]
+grep("kinase",sig.gene70$Description)
+```
+
+
+```{r}
+library(COPDSexualDimorphism.data)
+data(lgrc.expr.meta)
+
+sum(expr.meta$GENDER == "2-Female")
+summary(expr.meta$pkyrs)
+```
+
+```{r}
+qqnorm(expr.meta$pkyrs, pch = 1, frame = FALSE)
+qqline(expr.meta$pkyrs, col = "steelblue", lwd = 2)
+```
+```{r}
+boxplot(pkyrs~gender, data=expr.meta)
+```
+
+
+```{r}
+library(gwascat)
+data(ebicat_2020_04_30)
+ebicat_2020_04_30
+```
+```{r}
+sort(table(ebicat_2020_04_30$CHR_ID),decreasing=TRUE)
+library(GenomicRanges)
+sort(table(mcols(ebicat_2020_04_30)[,"DISEASE/TRAIT"]),)[1:10]
+```
+
+```{r}
+library(tissuesGeneExpression)
+data(tissuesGeneExpression)
+
+head(e[,1:5])
+```
+
+```{r}
+table(tissue)
+```
+
+```{r}
+for(tissue_site in unique(tissue)){
+  print(tissue_site)
+  print(mean(e["209169_at",tissue == tissue_site]))
+}
+```
+
+```{r}
+library(hgu133a.db)    # installed in section overview
+symbol = mapIds(hgu133a.db, keys=rownames(e), column="SYMBOL", keytype="PROBEID")
+
+symbol["209169_at"]
+sum(symbol == "H2AX", na.rm=TRUE)
+symbol[symbol == "H2AX" & !is.na(symbol)]
+```
+
+```{r}
+boxplot(as.numeric(e["205436_s_at",])~tissue)
+```
+```{r, fig.width=6}
+IDs = c("201884_at", "209169_at", "206269_at", "207437_at", "219832_s_at", "212827_at")
+par(mfrow=c(3,2))
+for(my_id in IDs){
+  boxplot(as.numeric(e[my_id,])~tissue, main=my_id)
+}
+par(mfrow=c(1,1))
+```
+
+
+
+
+
+
+

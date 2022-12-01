@@ -1,0 +1,56 @@
+---
+title: "Section 2: Bioconductor basics with GRanges and Biostrings"
+author: "Aditya Rao"
+date: "2022-12-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+my_working_dir = "/Users/adityarao/personal_projects/online_courses/HarvardX Data Analysis for Genomics Professional Certificate/HarvardX PH525.5x Introduction to Bioconductor Annotation and Analysis of Genomes and Genomic Assays"
+setwd(my_working_dir)
+library(data.table)
+library(ggplot2)
+```
+
+
+```{r}
+library(ERBS)
+data(HepG2)
+
+class(HepG2)
+```
+
+```{r}
+# install ERBS
+# install_github("genomicsclass/ERBS")
+
+# load GM12878 and HepG2 objects from ERBS package
+library(ERBS)
+data(GM12878)
+data(HepG2)
+
+# inspect HepG2 GRanges object
+class(HepG2)
+HepG2
+values(HepG2)
+
+# seqnames extracts chromosome names
+seqnames(HepG2)     # stored as type Rle
+chr = seqnames(HepG2)
+as.character(chr)    # view as character type
+
+# make a table of numbers of sequences on each chromosome
+table(chr)
+table(chr)[1:24]    # restrict to autosomes, X and Y
+
+# GRanges can be subsetted and ordered
+HepG2[chr=="chr20",]
+x = HepG2[order(HepG2),]
+seqnames(x)     # demonstrate usefulness of Rle type
+as.character(seqnames(x))
+
+```
+
+
+

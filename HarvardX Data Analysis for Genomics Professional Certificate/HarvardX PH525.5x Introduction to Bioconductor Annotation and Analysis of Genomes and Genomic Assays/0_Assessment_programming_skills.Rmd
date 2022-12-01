@@ -1,0 +1,36 @@
+---
+title: "Assessment: programming skills"
+author: "Aditya Rao"
+date: "2022-12-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+my_working_dir = "/Users/adityarao/personal_projects/online_courses/HarvardX Data Analysis for Genomics Professional Certificate/HarvardX PH525.5x Introduction to Bioconductor Annotation and Analysis of Genomes and Genomic Assays"
+setwd(my_working_dir)
+library(data.table)
+library(ggplot2)
+```
+
+```{r}
+library(dslabs)
+
+data(heights)
+heights
+```
+
+```{r}
+heights[777,]
+max(heights$height)
+which.min(heights$height)
+mean(heights$height)
+median(heights$height)
+sum(heights$sex == "Male")/nrow(heights)
+sum(heights$height >= 78)
+sum(heights$height >= 78 & heights$sex == "Female")
+```
+
+
+
+

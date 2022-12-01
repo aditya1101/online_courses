@@ -1,0 +1,19 @@
+---
+title: "Section 4: Genomic annotation with Bioconductor"
+author: "Aditya Rao"
+date: "2022-12-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+my_working_dir = "/Users/adityarao/personal_projects/online_courses/HarvardX Data Analysis for Genomics Professional Certificate/HarvardX PH525.5x Introduction to Bioconductor Annotation and Analysis of Genomes and Genomic Assays"
+setwd(my_working_dir)
+library(data.table)
+library(ggplot2)
+```
+
+
+
+
+
